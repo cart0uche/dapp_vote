@@ -49,6 +49,21 @@ function WorkflowStatus({ allowChangeStatus }) {
       count: steps.length,
    });
 
+   const getStatusLabel = (status) => {
+      switch (status) {
+         case 1:
+            return "New status : ProposalsRegistrationStarted";
+         case 2:
+            return "New status : ProposalsRegistrationEnded";
+         case 3:
+            return "New status : VotingSessionStarted";
+         case 4:
+            return "New status : VotingSessionEnded";
+         case 5:
+            return "New status : VotesTallied";
+      }
+   };
+
    useContractEvent({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
@@ -56,7 +71,15 @@ function WorkflowStatus({ allowChangeStatus }) {
       listener(event) {
          refetch();
          console.log(event);
-         console.log("");
+         console.log(event[0].args);
+         toast({
+            status: "success",
+            isClosable: true,
+            position: "top-middle",
+            title: "Voting session changed",
+            description: getStatusLabel(event[0].args.newStatus),
+         });
+         unwatch();
       },
    });
 
