@@ -105,6 +105,12 @@ contract Voting is Ownable {
         voters[msg.sender].hasVoted = true;
         proposalsArray[_id].voteCount++;
 
+        //proposition 
+        if (proposalsArray[_id].voteCount > proposalsArray[winningProposalID].voteCount){
+            winningProposalID = _id;
+       }
+        ///
+
         emit Voted(msg.sender, _id);
     }
 
@@ -168,6 +174,8 @@ contract Voting is Ownable {
             workflowStatus == WorkflowStatus.VotingSessionEnded,
             "Current status is not voting session ended"
         );
+    /*    j'enleve la boucle FOR pour eviter le Dos Gas Limit
+
         uint _winningProposalId;
         for (uint256 p = 0; p < proposalsArray.length; p++) {
             if (
@@ -178,7 +186,7 @@ contract Voting is Ownable {
             }
         }
         winningProposalID = _winningProposalId;
-
+    */
         workflowStatus = WorkflowStatus.VotesTallied;
         emit WorkflowStatusChange(
             WorkflowStatus.VotingSessionEnded,
@@ -186,3 +194,5 @@ contract Voting is Ownable {
         );
     }
 }
+
+// comme on fait un comptage temporaire il faut surment par rendre public ce comptage 
