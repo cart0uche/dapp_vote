@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAccount, useContractRead } from "wagmi";
 import Contract from "../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import WorkflowStatus from "./WorkflowStatus";
 
 function Main() {
    const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
@@ -29,7 +30,7 @@ function Main() {
 
    return (
       <div>
-         <p>Status: {workflowStatus}</p>
+         <WorkflowStatus status={workflowStatus} />
       </div>
    );
 }
