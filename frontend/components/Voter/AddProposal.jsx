@@ -1,19 +1,18 @@
 "use client";
-import { useState } from "react";
 import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
-import { useContractWrite } from "wagmi";
+import { useState } from "react";
+import { useContractWrite, useAccount } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
-import { getAddress } from "viem";
 
-function AddVoter() {
+function AddProposal() {
    const [inputValue, setInputValue] = useState("");
-   const [addressVoter, setAddressVoter] = useState("");
+   const [proposal, setProposal] = useState("");
 
    const { write } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
-      functionName: "addVoter",
-      args: [addressVoter !== "" ? getAddress(addressVoter) : ""],
+      functionName: "addProposal",
+      args: [proposal],
    });
 
    const handleChange = (event) => {
@@ -22,22 +21,23 @@ function AddVoter() {
 
    const handleSubmit = (event) => {
       event.preventDefault();
-      setAddressVoter(inputValue);
+      setProposal(inputValue);
       write();
       setInputValue("");
    };
 
    return (
       <div>
-         <Box maxWidth="400px" margin="0 auto">
+         {" "}
+         <Box maxWidth="1000px" margin="0 auto">
             <form onSubmit={handleSubmit}>
                <FormControl>
-                  <FormLabel>Voter address</FormLabel>
+                  <FormLabel>Add a proposal</FormLabel>
                   <Input
                      type="text"
                      value={inputValue}
                      onChange={handleChange}
-                     placeholder="address"
+                     placeholder="proposal"
                   />
                </FormControl>
                <Button type="submit" colorScheme="blue" marginTop="4">
@@ -49,4 +49,4 @@ function AddVoter() {
    );
 }
 
-export default AddVoter;
+export default AddProposal;

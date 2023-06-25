@@ -14,7 +14,7 @@ function Admin() {
             <ChangeWorkflowStatus />
             <Box
                marginLeft="80px"
-               marginTop="80px"
+               marginTop="50px"
                display="flex"
                justifyContent="flex-start"
             >
