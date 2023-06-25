@@ -1,19 +1,14 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Box } from "@chakra-ui/react";
 import { useVoteContext } from "@/components/voteContext";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 
 function ChangeWorkflowStatus() {
-   const { workflowStatus, setWorkFlowStatus } = useVoteContext();
-
-   useEffect(() => {
-      console.log("=====> ChangeWorkflowStatus  ", workflowStatus);
-   }, [workflowStatus]);
+   const { workflowStatus } = useVoteContext();
 
    function getNextStatusLabel() {
-      console.log("getNextStatusLabel ", workflowStatus);
       switch (workflowStatus) {
          case 0:
             return "Change status to ProposalsRegistrationStarted";
@@ -30,52 +25,50 @@ function ChangeWorkflowStatus() {
       }
    }
 
-   const { config: configStartProposalsRegistering } = usePrepareContractWrite({
+   const {
+      write: writeStartProposalsRegistering,
+      isLoading: isLoadingStartProposalsRegistering,
+   } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "startProposalsRegistering",
    });
-   const { config: configEndProposalsRegistering } = usePrepareContractWrite({
+
+   const {
+      write: writeEndProposalsRegistering,
+      isLoading: isLoadingEndProposalsRegistering,
+   } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "endProposalsRegistering",
    });
-   const { config: configStartVotingSession } = usePrepareContractWrite({
+
+   const {
+      write: writeStartVotingSession,
+      isLoading: isLoadingStartVotingSession,
+   } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "startVotingSession",
    });
-   const { config: configEndVotingSession } = usePrepareContractWrite({
+
+   const {
+      write: writeEndVotingSession,
+      isLoading: isLoadingEndVotingSession,
+   } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "endVotingSession",
    });
-   const { config: configTallyVotes } = usePrepareContractWrite({
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-      abi: Contract.abi,
-      functionName: "tallyVotes",
-   });
 
-   const { write: writeStartProposalsRegistering } = useContractWrite(
-      configStartProposalsRegistering
-   );
-
-   const { write: writeEndProposalsRegistering } = useContractWrite(
-      configEndProposalsRegistering
-   );
-
-   const { write: writeStartVotingSession } = useContractWrite(
-      configStartVotingSession
-   );
-
-   const { write: writeEndVotingSession } = useContractWrite(
-      configEndVotingSession
-   );
-
-   const { write: writeTallyVotes } = useContractWrite(configTallyVotes);
+   const { write: writeTallyVotes, isLoading: isLoadingTallyVotes } =
+      useContractWrite({
+         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+         abi: Contract.abi,
+         functionName: "tallyVotes",
+      });
 
    const sendWorkflowStatus = () => {
-      console.log("sendWorkflowStatus");
       switch (workflowStatus) {
          case 0:
             writeStartProposalsRegistering();
@@ -92,15 +85,28 @@ function ChangeWorkflowStatus() {
          case 4:
             writeTallyVotes();
             break;
-         case 5:
-            return "End";
       }
+   };
+
+   const isButtonLoading = () => {
+      return (
+         isLoadingStartProposalsRegistering ||
+         isLoadingEndProposalsRegistering ||
+         isLoadingStartVotingSession ||
+         isLoadingEndVotingSession ||
+         isLoadingTallyVotes
+      );
    };
 
    return (
       <div>
          <Box marginLeft="60px" marginRight="60px" marginTop="60px">
-            <Button colorScheme="blue" onClick={() => sendWorkflowStatus()}>
+            <Button
+               isLoading={isButtonLoading()}
+               loadingText="Submitting"
+               colorScheme="blue"
+               onClick={() => sendWorkflowStatus()}
+            >
                {getNextStatusLabel()}
             </Button>
          </Box>

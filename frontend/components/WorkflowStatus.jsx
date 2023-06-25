@@ -70,8 +70,6 @@ function WorkflowStatus({ allowChangeStatus }) {
       eventName: "WorkflowStatusChange",
       listener(event) {
          refetch();
-         console.log(event);
-         console.log(event[0].args);
          toast({
             status: "success",
             isClosable: true,
@@ -84,7 +82,6 @@ function WorkflowStatus({ allowChangeStatus }) {
    });
 
    useEffect(() => {
-      console.log("set worflow status to ", currentWorkflowStatus);
       setWorkFlowStatus(currentWorkflowStatus);
       setActiveStep(currentWorkflowStatus + 1);
    }, [currentWorkflowStatus]);
