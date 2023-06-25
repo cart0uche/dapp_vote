@@ -83,7 +83,7 @@ function WorkflowStatus({ allowChangeStatus }) {
 
    useEffect(() => {
       setWorkFlowStatus(currentWorkflowStatus);
-      setActiveStep(currentWorkflowStatus + 1);
+      setActiveStep(currentWorkflowStatus);
    }, [currentWorkflowStatus]);
 
    console.log("WorkflowStatus : ", currentWorkflowStatus);
