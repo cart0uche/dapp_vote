@@ -64,7 +64,7 @@ function WorkflowStatus({ allowChangeStatus }) {
       }
    };
 
-   useContractEvent({
+   const unwatch = useContractEvent({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       eventName: "WorkflowStatusChange",
