@@ -1,9 +1,10 @@
 "use client";
-import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, Button, useToast } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useContractWrite, useAccount } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 import { Grid } from "@chakra-ui/react";
+import { useContractRead, useContractEvent } from "wagmi";
 
 
 import React from 'react'
@@ -11,6 +12,7 @@ import React from 'react'
 function SetVote() {
     const [inputValue, setInputValue] = useState(0);
     const [proposalId, setProposalId] = useState(0);
+    const toast = useToast();
     
  
     const { write } = useContractWrite({
@@ -33,6 +35,35 @@ function SetVote() {
      useEffect(() => {
         write();
     }, [proposalId]);
+
+    useContractEvent()
+
+//  event
+    const unwatch = useContractEvent({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      abi: Contract.abi,
+      eventName: 'Voted',
+    //- once: true,
+      listener: (event) => {
+      refetch();
+     //toast
+         toast({
+            status: "success",
+            isClosable: true,
+            position: "top-middle",
+            title: "Vote registered",
+            description: `Proposal ${event[0].args.proposalId}`
+         });
+    +   unwatch();
+      }
+    });
+
+
+
+
+
+
+
  
     return (
        <div>
