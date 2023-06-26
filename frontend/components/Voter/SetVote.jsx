@@ -1,9 +1,10 @@
 "use client";
 import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContractWrite, useAccount } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 import { Grid } from "@chakra-ui/react";
+
 
 import React from 'react'
 
