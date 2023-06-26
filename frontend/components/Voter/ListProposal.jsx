@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
-import { publicClient } from "./client";
+import { publicClient } from "../client";
 
 import OneProposal from "./OneProposal";
 

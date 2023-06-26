@@ -3,6 +3,7 @@ import WorkflowStatus from "../WorkflowStatus";
 import AddVoter from "./AddVoter";
 import { Box } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
+import ListVoter from "./ListVoter";
 
 function Admin() {
    const { isConnected } = useAccount();
@@ -19,6 +20,7 @@ function Admin() {
                justifyContent="flex-start"
             >
                <AddVoter />
+               <ListVoter />
             </Box>
          </div>
       );
