@@ -8,15 +8,15 @@ import { Grid } from "@chakra-ui/react";
 import React from 'react'
 
 function SetVote() {
-    const [inputValue, setInputValue] = useState(3);
-    const [voter, setVoter] = useState(0);
+    const [inputValue, setInputValue] = useState(0);
+    const [proposalId, setProposalId] = useState(0);
     
  
     const { write } = useContractWrite({
        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
        abi: Contract.abi,
        functionName: "setVote",
-       args: [voter],
+       args: [proposalId],
     });
  
     const handleChange = (event) => {
@@ -26,11 +26,12 @@ function SetVote() {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        setVoter(inputValue);
-        write();
-        setInputValue(0);
+        setProposalId(inputValue);
      };
 
+     useEffect(() => {
+        write();
+    }, [proposalId]);
  
     return (
        <div>
