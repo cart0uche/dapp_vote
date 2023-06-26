@@ -2,7 +2,7 @@ import WorkflowStatus from "../WorkflowStatus";
 import AddProposal from "./AddProposal";
 import { Box } from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
-import SetVote from "./Setvote";
+import SetVote from "./SetVote";
 
 function Voters() {
    return (
@@ -11,7 +11,7 @@ function Voters() {
          <Box marginLeft="80px" marginTop="80px" justifyContent="flex-start">
             <AddProposal />
             <ListProposal />
-            <SetVote/>
+            <SetVote />
          </Box>
       </div>
    );

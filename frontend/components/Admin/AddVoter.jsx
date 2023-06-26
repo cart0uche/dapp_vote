@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
@@ -16,6 +16,10 @@ function AddVoter() {
       args: [addressVoter !== "" ? getAddress(addressVoter) : ""],
    });
 
+   useEffect(() => {
+      write();
+   }, [addressVoter]);
+
    const handleChange = (event) => {
       setInputValue(event.target.value);
    };
@@ -23,8 +27,6 @@ function AddVoter() {
    const handleSubmit = (event) => {
       event.preventDefault();
       setAddressVoter(inputValue);
-      write();
-      setInputValue("");
    };
 
    return (
