@@ -1,10 +1,11 @@
 "use client";
-import { FormControl, FormLabel, Input, Box, Button, useToast, Card, CardBody , Text, } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, Button, useToast, Card, CardBody , Text, Heading } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useContractWrite, useAccount } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 import { Grid } from "@chakra-ui/react";
 import { useContractRead, useContractEvent } from "wagmi";
+import { useVoteContext } from "@/components/voteContext";
 
 
 import React from 'react'
@@ -12,6 +13,7 @@ import React from 'react'
 function SetVote() {
     const [inputValue, setInputValue] = useState(0);
     const [proposalId, setProposalId] = useState(0);
+    const { workflowStatus, setWorkFlowStatus } = useVoteContext();
     const toast = useToast();
     
  
@@ -68,6 +70,8 @@ function SetVote() {
  
     return (
        <div>
+         <Card >
+            <CardBody  >
         <Grid templateColumns="auto 1fr auto" gap={4} alignItems="center">
           {" "}
           <Box maxWidth="500px" margin="0 auto">
@@ -82,15 +86,14 @@ function SetVote() {
                       style={{ width: "fit-content" }}
                    />
                 </FormControl>
-                <Button type="submit" colorScheme="green" marginTop="9" rounded="full" size="lg" fontWeight="bold">
+                <Button isDisabled={workflowStatus !== 3} type="submit" colorScheme="green" marginTop="9" rounded="full" size="lg" fontWeight="bold">
                    Vote
                 </Button>
              </form>
           </Box>
           </Grid>
-          <Card >
-            <CardBody >
-               <Text fontSize={12} >TEST VOTE</Text>
+         
+               <Heading size='md'>Button active only at VotingSessionStarted</Heading>
             </CardBody>
          </Card>
        </div>
