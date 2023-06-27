@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FormControl, FormLabel, Input, Box, Button } from "@chakra-ui/react";
+import { FormControl, Heading, Input, Box, Button } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 import { useVoteContext } from "@/components/voteContext";
-import { Heading } from "@chakra-ui/react";
 
 function AddVoter() {
    const [inputValue, setInputValue] = useState("");

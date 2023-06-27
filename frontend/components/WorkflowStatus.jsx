@@ -22,12 +22,12 @@ function WorkflowStatus({ allowChangeStatus }) {
    const { workflowStatus, setWorkFlowStatus } = useVoteContext();
    const toast = useToast();
    const steps = [
-      { title: "RegisteringVoters", description: "" },
-      { title: "ProposalsRegistrationStarted", description: "" },
-      { title: "ProposalsRegistrationEnded", description: "" },
-      { title: "VotingSessionStarted", description: "" },
-      { title: "VotingSessionEnded", description: "" },
-      { title: "VotesTallied", description: "" },
+      { title: "Registering Voters", description: "" },
+      { title: "Proposals Registration Started", description: "" },
+      { title: "Proposals Registration Ended", description: "" },
+      { title: "Voting Session Started", description: "" },
+      { title: "Voting Session Ended", description: "" },
+      { title: "Votes Tallied", description: "" },
    ];
 
    const {

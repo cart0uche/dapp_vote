@@ -4,12 +4,7 @@ import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.jso
 import { useContractRead } from "wagmi";
 
 function OneProposal({ proposalId }) {
-   const {
-      data: dataProposal,
-      isLoading,
-      error,
-      refetch,
-   } = useContractRead({
+   const { data: dataProposal } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "getOneProposal",
@@ -23,7 +18,7 @@ function OneProposal({ proposalId }) {
       <>
          {dataProposal ? (
             <>
-               <CardHeader>Proposal ID: {proposalId}</CardHeader>
+               <CardHeader>Proposal number {proposalId}</CardHeader>
                <CardBody>{dataProposal.description}</CardBody>
             </>
          ) : null}
