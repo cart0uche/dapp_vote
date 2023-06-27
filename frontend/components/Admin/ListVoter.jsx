@@ -11,6 +11,7 @@ import { publicClient } from "../client";
 import OneVoter from "./OneVoter";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
 import { useContractEvent } from "wagmi";
+import { Heading } from "@chakra-ui/react";
 
 function ListVoter() {
    const [voters, setVoters] = useState([]);
@@ -61,7 +62,7 @@ function ListVoter() {
 
    return (
       <div>
-         {" "}
+         <Heading>List of voters</Heading>
          {voters.map((voter, index) => (
             <Card key={index} marginBottom="4">
                <OneVoter address={voter.address} />

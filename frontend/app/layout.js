@@ -3,15 +3,18 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { hardhat } from "wagmi/chains";
+import { hardhat, sepolia } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { ChakraProvider } from "@chakra-ui/react";
 import { VoteContextProvider } from "@/components/voteContext";
 
 const { chains, publicClient } = configureChains(
-   [hardhat],
-   [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+   [hardhat, sepolia],
+   [
+      //alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+      publicProvider(),
+   ]
 );
 
 const { connectors } = getDefaultWallets({
@@ -21,7 +24,7 @@ const { connectors } = getDefaultWallets({
 });
 
 const wagmiConfig = createConfig({
-   autoConnect: false,
+   autoConnect: true,
    connectors,
    publicClient,
 });
