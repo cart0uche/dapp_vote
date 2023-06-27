@@ -45,14 +45,15 @@ function SetVote() {
       eventName: 'Voted',
     //- once: true,
       listener: (event) => {
-      refetch();
+    //-refetch();
+      console.log("Voted" + event);
      //toast
          toast({
             status: "success",
             isClosable: true,
             position: "top-middle",
             title: "Vote registered",
-            description: `Proposal ${event[0].args.proposalId}`
+            description: "Proposal" + event[0].args.proposalId ,
          });
     +   unwatch();
       }
