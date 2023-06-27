@@ -1,5 +1,5 @@
 "use client";
-import { FormControl, FormLabel, Input, Box, Button, useToast } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Box, Button, useToast, Card, CardBody , Text, } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useContractWrite, useAccount } from "wagmi";
 import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
@@ -88,6 +88,11 @@ function SetVote() {
              </form>
           </Box>
           </Grid>
+          <Card >
+            <CardBody >
+               <Text fontSize={12} >TEST VOTE</Text>
+            </CardBody>
+         </Card>
        </div>
     );
  }
