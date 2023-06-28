@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { FormControl, Heading, Input, Box, Button } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
-import Contract from "../public/Voting.json";
+import Contract from "../../public/Voting.json";
 import { useVoteContext } from "@/components/voteContext";
 
 function AddVoter() {
