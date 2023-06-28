@@ -4,7 +4,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
 import ListVoter from "../ListVoter";
 import { useAccount } from "wagmi";
-import TallyVotes from "./TallyVotes";
+import WinningProposal from "./WinningProposal";
 
 
 function Voters() {
@@ -27,7 +27,7 @@ function Voters() {
                   <ListVoter showVoterDetails={true} />
                </Box>
                <Box marginLeft="50px" width="30%">
-                  <TallyVotes />
+                  <WinningProposal />
                </Box>
             </Flex>
          </div>
