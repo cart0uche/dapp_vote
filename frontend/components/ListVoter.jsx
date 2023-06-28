@@ -16,7 +16,7 @@ function ListVoter({ showVoterDetails }) {
       const filter = await publicClient.createEventFilter({
          address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
          event: parseAbiItem("event VoterRegistered(address)"),
-         fromBlock: 0n,
+         fromBlock: 3786668n,
       });
 
       const logs = await publicClient.getFilterLogs({ filter });

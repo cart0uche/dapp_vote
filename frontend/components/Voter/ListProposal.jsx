@@ -24,7 +24,7 @@ function ListProposal() {
       const filter = await publicClient.createEventFilter({
          address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
          event: parseAbiItem("event ProposalRegistered(uint256)"),
-         fromBlock: 0n,
+         fromBlock: 3786668n,
       });
 
       const logs = await publicClient.getFilterLogs({ filter });
