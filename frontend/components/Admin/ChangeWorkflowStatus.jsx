@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, Box } from "@chakra-ui/react";
 import { useVoteContext } from "@/components/voteContext";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
-import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../../public/Voting.json";
 
 function ChangeWorkflowStatus() {
    const { workflowStatus } = useVoteContext();

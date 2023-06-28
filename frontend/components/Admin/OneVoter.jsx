@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../../public/Voting.json";
 import { useContractRead } from "wagmi";
 
 function OneVoter({ address, showVoterDetails }) {

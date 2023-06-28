@@ -1,6 +1,6 @@
 "use client";
 import { CardHeader, CardBody } from "@chakra-ui/react";
-import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../../public/Voting.json";
 import { useContractRead } from "wagmi";
 
 function OneProposal({ proposalId }) {

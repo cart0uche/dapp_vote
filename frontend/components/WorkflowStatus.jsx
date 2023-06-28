@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useVoteContext } from "@/components/voteContext";
-import Contract from "../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../public/Voting.json";
 
 function WorkflowStatus({ allowChangeStatus }) {
    const { workflowStatus, setWorkFlowStatus } = useVoteContext();

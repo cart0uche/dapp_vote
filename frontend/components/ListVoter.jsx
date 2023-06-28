@@ -3,7 +3,7 @@ import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "./client";
 import OneVoter from "./Admin/OneVoter";
-import Contract from "../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../public/Voting.json";
 import { useContractEvent } from "wagmi";
 import { Heading } from "@chakra-ui/react";
 

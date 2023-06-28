@@ -12,7 +12,7 @@ import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "../client";
 import { useContractEvent } from "wagmi";
-import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../../public/Voting.json";
 import OneProposal from "./OneProposal";
 import SetVote from "./SetVote";
 

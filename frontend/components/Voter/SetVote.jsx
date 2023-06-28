@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
-import Contract from "../../../backend/artifacts/contracts/Voting.sol/Voting.json";
+import Contract from "../../public/Voting.json";
 import { useVoteContext } from "@/components/voteContext";
 
 function SetVote({ proposalId }) {
