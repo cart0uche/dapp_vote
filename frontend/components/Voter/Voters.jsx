@@ -4,6 +4,8 @@ import { Box, Flex } from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
 import ListVoter from "../ListVoter";
 import { useAccount } from "wagmi";
+import TallyVotes from "./TallyVotes";
+
 
 function Voters() {
    const { isConnected } = useAccount();
@@ -23,6 +25,9 @@ function Voters() {
                </Flex>
                <Box marginLeft="50px" width="30%">
                   <ListVoter showVoterDetails={true} />
+               </Box>
+               <Box marginLeft="50px" width="30%">
+                  <TallyVotes />
                </Box>
             </Flex>
          </div>
