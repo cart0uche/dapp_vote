@@ -1,9 +1,11 @@
 "use client";
 import { CardHeader, CardBody } from "@chakra-ui/react";
 import Contract from "../../public/Voting.json";
-import { useContractRead } from "wagmi";
+import { useContractRead, useAccount } from "wagmi";
 
 function OneProposal({ proposalId }) {
+   const { address } = useAccount();
+
    const { data: dataProposal } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
@@ -12,6 +14,7 @@ function OneProposal({ proposalId }) {
          console.log("Error", error);
       },
       args: [proposalId],
+      account: address,
    });
 
    return (

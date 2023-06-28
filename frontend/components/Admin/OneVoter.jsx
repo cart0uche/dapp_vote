@@ -1,9 +1,10 @@
 import { Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import Contract from "../../public/Voting.json";
-import { useContractRead } from "wagmi";
+import { useContractRead, useAccount } from "wagmi";
 
 function OneVoter({ address, showVoterDetails }) {
+   const { address: addrAccount } = useAccount();
    const {
       data: dataVoter,
       isLoading,
@@ -17,9 +18,8 @@ function OneVoter({ address, showVoterDetails }) {
          console.log("Error", error);
       },
       args: [address],
+      account: addrAccount,
    });
-
-   console.log(dataVoter);
 
    function getVoterInfo() {
       if (dataVoter.hasVoted) {
@@ -44,14 +44,14 @@ function OneVoter({ address, showVoterDetails }) {
 
    return (
       <>
-         {dataVoter ? (
-            <Card marginBottom="4">
-               <CardHeader>
-                  <Heading size="md"> {address}</Heading>
-               </CardHeader>
-               <CardBody>{showVoterDetails ? getVoterInfo() : ""}</CardBody>
-            </Card>
-         ) : null}
+         <Card marginBottom="4">
+            <CardHeader>
+               <Heading size="md"> {address}</Heading>
+            </CardHeader>
+            <CardBody>
+               {showVoterDetails && dataVoter ? getVoterInfo() : ""}
+            </CardBody>
+         </Card>
       </>
    );
 }

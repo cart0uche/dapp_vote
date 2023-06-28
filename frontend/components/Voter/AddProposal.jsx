@@ -1,20 +1,35 @@
 "use client";
-import { FormControl, Textarea, Box, Button, Heading } from "@chakra-ui/react";
+import {
+   FormControl,
+   Textarea,
+   Box,
+   Button,
+   Heading,
+   useToast
+} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useContractWrite } from "wagmi";
 import Contract from "../../public/Voting.json";
-import { useVoteContext } from "@/components/voteContext";
 
 function AddProposal() {
-   const { workflowStatus, setWorkFlowStatus } = useVoteContext();
    const [inputValue, setInputValue] = useState("");
    const [proposal, setProposal] = useState("");
+   const toast = useToast();
 
    const { write, isLoading } = useContractWrite({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "addProposal",
       args: [proposal],
+      onError(error) {
+         console.log(error);
+         toast({
+            status: "error",
+            isClosable: true,
+            position: "top-middle",
+            title: "addProposal function failed",
+         });
+      },
    });
 
    const handleChange = (event) => {
@@ -51,7 +66,6 @@ function AddProposal() {
                   type="submit"
                   colorScheme="blue"
                   marginTop="4"
-                  isDisabled={workflowStatus !== 1}
                >
                   Add
                </Button>

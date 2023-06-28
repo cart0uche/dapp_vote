@@ -6,13 +6,13 @@ import OneVoter from "./Admin/OneVoter";
 import Contract from "../public/Voting.json";
 import { useContractEvent } from "wagmi";
 import { Heading } from "@chakra-ui/react";
+import { v4 as uuidv4 } from "uuid";
 
 function ListVoter({ showVoterDetails }) {
    const [voters, setVoters] = useState([]);
    const toast = useToast();
 
    async function fetchVoters() {
-      console.log("fetchData VoterRegistered");
       const filter = await publicClient.createEventFilter({
          address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
          event: parseAbiItem("event VoterRegistered(address)"),
@@ -22,13 +22,11 @@ function ListVoter({ showVoterDetails }) {
       const logs = await publicClient.getFilterLogs({ filter });
 
       const parsedVoters = logs.map((log, index) => {
-         console.log("parsedVoters: " + log);
          const address = log.args[0];
          return {
             address,
          };
       });
-
       setVoters(parsedVoters);
    }
 
@@ -75,9 +73,9 @@ function ListVoter({ showVoterDetails }) {
    return (
       <div>
          <Heading>List of voters</Heading>
-         {voters.map((voter, index) => (
+         {voters.map((voter) => (
             <OneVoter
-               key={index}
+               key={uuidv4()}
                address={voter.address}
                showVoterDetails={showVoterDetails}
             />

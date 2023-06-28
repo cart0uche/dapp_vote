@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, useToast } from "@chakra-ui/react";
 import { useVoteContext } from "@/components/voteContext";
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { useContractWrite } from "wagmi";
 import Contract from "../../public/Voting.json";
 
 function ChangeWorkflowStatus() {
    const { workflowStatus } = useVoteContext();
+   const toast = useToast();
 
    function getNextStatusLabel() {
       switch (workflowStatus) {
@@ -32,6 +32,15 @@ function ChangeWorkflowStatus() {
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "startProposalsRegistering",
+      onError(error) {
+         console.log(error);
+         toast({
+            status: "error",
+            isClosable: true,
+            position: "top-middle",
+            title: "startProposalsRegistering function failed",
+         });
+      },
    });
 
    const {
@@ -41,6 +50,15 @@ function ChangeWorkflowStatus() {
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "endProposalsRegistering",
+      onError(error) {
+         console.log(error);
+         toast({
+            status: "error",
+            isClosable: true,
+            position: "top-middle",
+            title: "endProposalsRegistering function failed",
+         });
+      },
    });
 
    const {
@@ -50,6 +68,15 @@ function ChangeWorkflowStatus() {
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "startVotingSession",
+      onError(error) {
+         console.log(error);
+         toast({
+            status: "error",
+            isClosable: true,
+            position: "top-middle",
+            title: "startVotingSession function failed",
+         });
+      },
    });
 
    const {
@@ -59,6 +86,15 @@ function ChangeWorkflowStatus() {
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "endVotingSession",
+      onError(error) {
+         console.log(error);
+         toast({
+            status: "error",
+            isClosable: true,
+            position: "top-middle",
+            title: "endVotingSession function failed",
+         });
+      },
    });
 
    const { write: writeTallyVotes, isLoading: isLoadingTallyVotes } =
@@ -66,6 +102,15 @@ function ChangeWorkflowStatus() {
          address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
          abi: Contract.abi,
          functionName: "tallyVotes",
+         onError(error) {
+            console.log(error);
+            toast({
+               status: "error",
+               isClosable: true,
+               position: "top-middle",
+               title: "tallyVotes function failed",
+            });
+         },
       });
 
    const sendWorkflowStatus = () => {

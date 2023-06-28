@@ -15,6 +15,7 @@ import { useContractEvent } from "wagmi";
 import Contract from "../../public/Voting.json";
 import OneProposal from "./OneProposal";
 import SetVote from "./SetVote";
+import { v4 as uuidv4 } from "uuid";
 
 function ListProposal() {
    const [proposals, setProposals] = useState([]);
@@ -64,8 +65,8 @@ function ListProposal() {
    return (
       <div>
          <Heading>List of proposals</Heading>
-         {proposals.map((proposal, index) => (
-            <Card key={index} marginBottom="4">
+         {proposals.map((proposal) => (
+            <Card key={uuidv4()} marginBottom="4">
                <OneProposal proposalId={proposal.proposalId} />
                <CardFooter>
                   <SetVote proposalId={proposal.proposalId} />

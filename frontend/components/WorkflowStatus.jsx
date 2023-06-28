@@ -17,9 +17,10 @@ import {
 import { useEffect } from "react";
 import { useVoteContext } from "@/components/voteContext";
 import Contract from "../public/Voting.json";
+import { v4 as uuidv4 } from "uuid";
 
 function WorkflowStatus({ allowChangeStatus }) {
-   const { workflowStatus, setWorkFlowStatus } = useVoteContext();
+   const { setWorkFlowStatus } = useVoteContext();
    const toast = useToast();
    const steps = [
       { title: "Registering Voters", description: "" },
@@ -92,8 +93,8 @@ function WorkflowStatus({ allowChangeStatus }) {
       <div>
          <Box marginLeft="60px" marginRight="60px">
             <Stepper size="lg" index={activeStep}>
-               {steps.map((step, index) => (
-                  <Step key={index}>
+               {steps.map((step) => (
+                  <Step key={uuidv4()}>
                      <StepIndicator>
                         <StepStatus
                            complete={<StepIcon />}
