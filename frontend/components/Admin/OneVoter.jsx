@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, Heading } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, Heading, Tooltip } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import Contract from "../../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
@@ -46,7 +46,13 @@ function OneVoter({ address, showVoterDetails }) {
       <>
          <Card marginBottom="4">
             <CardHeader>
-               <Heading size="md"> {address}</Heading>
+               <Heading size="md">
+                  <Tooltip label={address} aria-label="A tooltip">
+                     {address.substring(0, 4) +
+                        "..." +
+                        address.substring(address.length - 4)}
+                  </Tooltip>
+               </Heading>
             </CardHeader>
             <CardBody>
                {showVoterDetails && dataVoter ? getVoterInfo() : ""}
