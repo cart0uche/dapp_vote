@@ -5,7 +5,7 @@ import {
    Box,
    Button,
    Heading,
-   useToast
+   useToast,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useContractWrite } from "wagmi";
@@ -50,7 +50,6 @@ function AddProposal() {
 
    return (
       <div>
-         <Heading>Add a proposal</Heading>
          <Box marginTop="100px" margin="0 auto">
             <form onSubmit={handleSubmit}>
                <FormControl>
@@ -58,7 +57,7 @@ function AddProposal() {
                      type="text"
                      value={inputValue}
                      onChange={handleChange}
-                     placeholder="proposal"
+                     placeholder="Add a proposal"
                   />
                </FormControl>
                <Button

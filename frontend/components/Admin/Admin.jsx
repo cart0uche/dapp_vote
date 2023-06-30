@@ -15,16 +15,22 @@ function Admin() {
          <div>
             <WorkflowStatus />
             <ChangeWorkflowStatus />
-            <Flex justifyContent="center" marginTop="50px">
+            <Flex
+               justifyContent="center"
+               alignItems="center"
+               marginTop={70}
+               marginLeft={100}
+               marginBottom={70}
+            >
                {workflowStatus === 0 ? (
-                  <Box>
+                  <Box w="300px">
                      <AddVoter />
                   </Box>
                ) : null}
-               <Box marginLeft="50px">
-                  <ListVoter showVoterDetails={false} />
-               </Box>
             </Flex>
+            <Box marginLeft={100}>
+               <ListVoter showVoterDetails={false} />
+            </Box>
          </div>
       );
    } else {

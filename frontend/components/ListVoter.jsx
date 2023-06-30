@@ -1,4 +1,4 @@
-import { useToast } from "@chakra-ui/react";
+import { SimpleGrid, useToast } from "@chakra-ui/react";
 import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "./client";
@@ -54,14 +54,22 @@ function ListVoter({ showVoterDetails, newVote }) {
 
    return (
       <div>
-         <Heading>List of voters</Heading>
-         {voters.map((voter) => (
-            <OneVoter
-               key={uuidv4()}
-               address={voter.address}
-               showVoterDetails={showVoterDetails}
-            />
-         ))}
+         <SimpleGrid
+            spacing={4}
+            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+         >
+            {voters.length > 0 ? (
+               voters.map((voter) => (
+                  <OneVoter
+                     key={uuidv4()}
+                     address={voter.address}
+                     showVoterDetails={showVoterDetails}
+                  />
+               ))
+            ) : (
+               <span>No voters yet</span>
+            )}
+         </SimpleGrid>
       </div>
    );
 }

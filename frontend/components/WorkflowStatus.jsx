@@ -24,10 +24,10 @@ function WorkflowStatus({ allowChangeStatus }) {
    const toast = useToast();
    const steps = [
       { title: "Registering Voters", description: "" },
-      { title: "Proposals Registration Started", description: "" },
-      { title: "Proposals Registration Ended", description: "" },
-      { title: "Voting Session Started", description: "" },
-      { title: "Voting Session Ended", description: "" },
+      { title: "Proposals Started", description: "" },
+      { title: "Proposals Ended", description: "" },
+      { title: "Voting Started", description: "" },
+      { title: "Voting Ended", description: "" },
       { title: "Votes Tallied", description: "" },
    ];
 

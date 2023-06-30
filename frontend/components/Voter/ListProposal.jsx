@@ -1,4 +1,11 @@
-import { Card, Heading, CardFooter, useToast, Divider } from "@chakra-ui/react";
+import {
+   Card,
+   Heading,
+   CardFooter,
+   useToast,
+   Divider,
+   SimpleGrid,
+} from "@chakra-ui/react";
 import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "../client";
@@ -55,16 +62,24 @@ function ListProposal({ newVote }) {
 
    return (
       <div>
-         <Heading>List of proposals</Heading>
-         {proposals.map((proposal) => (
-            <Card key={uuidv4()} marginBottom="4">
-               <OneProposal proposalId={proposal.proposalId} />
-               <Divider />
-               <CardFooter>
-                  <SetVote proposalId={proposal.proposalId} />
-               </CardFooter>
-            </Card>
-         ))}
+         <SimpleGrid
+            spacing={4}
+            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+         >
+            {proposals.length > 0 ? (
+               proposals.map((proposal) => (
+                  <Card key={uuidv4()} marginBottom="4">
+                     <OneProposal proposalId={proposal.proposalId} />
+                     <Divider />
+                     <CardFooter>
+                        <SetVote proposalId={proposal.proposalId} />
+                     </CardFooter>
+                  </Card>
+               ))
+            ) : (
+               <span>No proposals yet</span>
+            )}
+         </SimpleGrid>
       </div>
    );
 }
