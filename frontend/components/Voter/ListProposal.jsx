@@ -1,13 +1,4 @@
-import {
-   Card,
-   Heading,
-   CardHeader,
-   CardBody,
-   CardFooter,
-   useToast,
-   Button,
-   ButtonGroup,
-} from "@chakra-ui/react";
+import { Card, Heading, CardFooter, useToast, Divider } from "@chakra-ui/react";
 import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "../client";
@@ -17,7 +8,7 @@ import OneProposal from "./OneProposal";
 import SetVote from "./SetVote";
 import { v4 as uuidv4 } from "uuid";
 
-function ListProposal() {
+function ListProposal({ newVote }) {
    const [proposals, setProposals] = useState([]);
    const toast = useToast();
 
@@ -42,7 +33,7 @@ function ListProposal() {
 
    useEffect(() => {
       fetchProposal();
-   }, []);
+   }, [newVote]);
 
    const unwatchProposal = useContractEvent({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
@@ -68,6 +59,7 @@ function ListProposal() {
          {proposals.map((proposal) => (
             <Card key={uuidv4()} marginBottom="4">
                <OneProposal proposalId={proposal.proposalId} />
+               <Divider />
                <CardFooter>
                   <SetVote proposalId={proposal.proposalId} />
                </CardFooter>

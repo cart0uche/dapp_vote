@@ -8,7 +8,7 @@ import { useContractEvent } from "wagmi";
 import { Heading } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
-function ListVoter({ showVoterDetails }) {
+function ListVoter({ showVoterDetails, newVote }) {
    const [voters, setVoters] = useState([]);
    const toast = useToast();
 
@@ -48,27 +48,9 @@ function ListVoter({ showVoterDetails }) {
       },
    });
 
-   const unwatchVote = useContractEvent({
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-      abi: Contract.abi,
-      eventName: "Voted",
-      listener: (event) => {
-         fetchVoters();
-         console.log("Voted" + event);
-         toast({
-            status: "success",
-            isClosable: true,
-            position: "top-middle",
-            title: "Vote registered",
-            description: "Proposal" + event[0].args.proposalId,
-         });
-         unwatchVote();
-      },
-   });
-
    useEffect(() => {
       fetchVoters();
-   }, []);
+   }, [newVote]);
 
    return (
       <div>
