@@ -16,6 +16,7 @@ function Voters() {
          <div>
             <WorkflowStatus />
             <Flex justifyContent="center" marginTop="50px">
+               
                <Flex width="30%" direction="column" alignItems="center">
                   {workflowStatus === 1 ? (
                      <Box width="50%" marginBottom="20px" marginTop="50px">
@@ -26,9 +27,11 @@ function Voters() {
                      <ListProposal />
                   </Box>
                </Flex>
+
                <Box marginLeft="50px" width="30%" marginTop="50px">
                   <ListVoter showVoterDetails={true} />
                </Box>
+
                <Box marginLeft="50px" width="30%" marginTop="50px">
                   <WinningProposal />
                </Box>
