@@ -1,133 +1,102 @@
-// yarn hardhat run --network localhost scripts/the_script/allStep.js
+// yarn hardhat run --network localhost scripts/thescript/allStep.js
 // lancer le script
-http://localhost:3000
-
-
-//////////////////
+//http://localhost:3000
 
 const { ethers } = require("hardhat");
 
+function wait(delay) {
+  return new Promise((resolve) => setTimeout(resolve, delay));
+}
 
 async function main() {
   // Adresse du contrat déployé localement
   const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
 
-  const [owner, account1, account2, account3, account4,account5  ] = await hre.ethers.getSigners();
-
+  const [owner, account1, account2, account3, account4, account5] = await ethers.getSigners();
 
   // Abstraction du contrat
   const Contract = await ethers.getContractFactory("Voting");
   const contract = await Contract.attach(contractAddress);
 
-  // par default c'est lehonneur [0] qui appelle la fonction
-  // function addVoter onlyOwner
+  const add1 = await contract.addVoter(account1.address);
+  console.log("Résultat de l'appel de fonction :", add1);
+  await wait(4000);
 
-    const add1 = await contract.addVoter(account1.address);
-    console.log("Résultat de l'appel de fonction :", add1);
+  const add2 = await contract.addVoter(account2.address);
+  console.log("Résultat de l'appel de fonction :", add2);
+  await wait(4000);
 
-    const waitFourSeconds = () => {
-        setTimeout(() => {
-          console.log("4 secondes se sont écoulées !");
-        }, 4000);
-      };
-      
-      // Appeler la fonction pour démarrer l'attente de 4 secondes
-      waitFourSeconds();
+  const add3 = await contract.addVoter(account3.address);
+  console.log("Résultat de l'appel de fonction :", add3);
+  await wait(4000);
 
-    const add2 = await contract.addVoter(account2.address);
-    console.log("Résultat de l'appel de fonction :", add2);
+  const add4 = await contract.addVoter(account4.address);
+  console.log("Résultat de l'appel de fonction :", add4);
+  await wait(4000);
 
-    const add3 = await contract.addVoter(account3.address);
-    console.log("Résultat de l'appel de fonction :", add3);
+  const add5 = await contract.addVoter(account5.address);
+  console.log("Résultat de l'appel de fonction :", add5);
+  await wait(4000);
 
-    // function startProposalsRegistering  WorkFow Satus
-    // par default c'est le owner [0] qui appelle la fonction
-    const startProposal = await contract.startProposalsRegistering();
-    console.log("Résultat de l'appel de fonction :",startProposal );
+  console.log("4 secondes se sont écoulées !");
 
-    //
-      // function addProposal  
-    // only Voters
-    const proposal1 = await contract.connect(account1).addProposal("Rouge");
-    console.log("Résultat de l'appel de fonction :", proposal1)
+  const startProposal = await contract.startProposalsRegistering();
+  console.log("Résultat de l'appel de fonction :", startProposal);
+  await wait(4000);
 
-    const proposal2 = await contract.connect(account2).addProposal("Vert");
-    console.log("Résultat de l'appel de fonction :", proposal2)
+  const proposal1 = await contract.connect(account1).addProposal("Rouge");
+  console.log("Résultat de l'appel de fonction :", proposal1);
+  await wait(4000);
 
-    const proposal3 = await contract.connect(account3).addProposal("Jaune");
-    console.log("Résultat de l'appel de fonction :", proposal3)
+  const proposal2 = await contract.connect(account2).addProposal("Vert");
+  console.log("Résultat de l'appel de fonction :", proposal2);
+  await wait(4000);
 
-    const proposal4 = await contract.connect(account4).addProposal("bleu");
-    console.log("Résultat de l'appel de fonction :", proposal4)
+  const proposal3 = await contract.connect(account3).addProposal("Jaune");
+  console.log("Résultat de l'appel de fonction :", proposal3);
+  await wait(4000);
 
-    const proposa5 = await contract.connect(account5).addProposal("noir");
-    console.log("Résultat de l'appel de fonction :", proposal5)
+  const proposal4 = await contract.connect(account4).addProposal("bleu");
+  console.log("Résultat de l'appel de fonction :", proposal4);
+  await wait(4000);
 
+  const proposal5 = await contract.connect(account5).addProposal("noir");
+  console.log("Résultat de l'appel de fonction :", proposal5);
+  await wait(4000);
 
+  console.log("4 secondes se sont écoulées !");
 
-    // function endProposalsRegistering  WorkFow Satus
-    // par default c'est lehonneur [0] qui appelle la fonction
-    const endProposal = await contract.endProposalsRegistering();
-    console.log("Résultat de l'appel de fonction :",endProposal );
+  const endProposal = await contract.endProposalsRegistering();
+  console.log("Résultat de l'appel de fonction :", endProposal);
+  await wait(4000);
 
+  const startVoting = await contract.startVotingSession();
+  console.log("Résultat de l'appel de fonction :", startVoting);
+  await wait(4000);
 
+  const votedPoposal1 = await contract.connect(account1).setVote(1);
+  console.log("Résultat de l'appel de fonction :", votedPoposal1);
 
-      
+  const votedProposal2 = await contract.connect(account2).setVote(2);
+  console.log("Résultat de l'appel de fonction :", votedProposal2);
 
+  const votedProposal3 = await contract.connect(account3).setVote(2);
+  console.log("Résultat de l'appel de fonction :", votedProposal3);
 
-    // function endProposalsRegistering  WorkFow Satus
-    // par default c'est lehonneur [0] qui appelle la fonction
-    const startVoting = await contract.startVotingSession();
-    console.log("Résultat de l'appel de fonction :",startVoting );
+  const votedProposal4 = await contract.connect(account4).setVote(2);
+  console.log("Résultat de l'appel de fonction :", votedProposal4);
 
+  const votedProposal5 = await contract.connect(account5).setVote(3);
+  console.log("Résultat de l'appel de fonction :", votedProposal5);
 
-      /*
+  console.log("4 secondes se sont écoulées !");
 
+  const endVoting = await contract.endVotingSession();
+  console.log("Résultat de l'appel de fonction :", endVoting);
+  await wait(4000);
 
-      // function setVote
-    // only Voters
-    const votedPoposal1 = await contract.connect(account1).setVote(1);
-    console.log("Résultat de l'appel de fonction :", proposal1)
-
-    const votedProposal2 = await contract.connect(account2).setVote(2);
-    console.log("Résultat de l'appel de fonction :", proposal2)
-
-    const votedPproposal3 = await contract.connect(account3).setVotel(2);
-    console.log("Résultat de l'appel de fonction :", proposal3)
-
-    const votedProposal4 = await contract.connect(account4).setVote(2);
-    console.log("Résultat de l'appel de fonction :", proposal2)
-
-    const votedPproposal5 = await contract.connect(account5).setVote(3);
-    console.log("Résultat de l'appel de fonction :", proposal3)
-
-    // function endProposalsRegistering  WorkFow Satus
-    // par default c'est l'owner [0] qui appelle la fonction
-    const endVoting = await contract.endVotingSession();
-    console.log("Résultat de l'appel de fonction :",endVoting );
-
-      // function endProposalsRegistering  WorkFow Satus
-    // par default c'est l'owner [0] qui appelle la fonction
-    const tallyVotes = await contract.tallyVotes();
-    console.log("Résultat de l'appel de fonction :",tallyVotes );
-
-
-   */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
+  const tallyVotes = await contract.tallyVotes();
+  console.log("Résultat de l'appel de fonction :", tallyVotes);
 }
 
 main()
@@ -136,3 +105,10 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+
+
+
+
+
+
