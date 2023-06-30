@@ -1,7 +1,15 @@
-import { Card, CardHeader, CardBody, Heading, Tooltip } from "@chakra-ui/react";
+import {
+   Card,
+   CardHeader,
+   CardBody,
+   Heading,
+   Tooltip,
+   Flex,
+} from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import Contract from "../../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
+import Blockies from "react-blockies";
 
 function OneVoter({ address, showVoterDetails }) {
    const { address: addrAccount } = useAccount();
@@ -46,13 +54,22 @@ function OneVoter({ address, showVoterDetails }) {
       <>
          <Card marginBottom="4">
             <CardHeader>
-               <Heading size="md">
-                  <Tooltip label={address} aria-label="A tooltip">
-                     {address.substring(0, 4) +
-                        "..." +
-                        address.substring(address.length - 4)}
-                  </Tooltip>
-               </Heading>
+               <Flex gap="6">
+                  <Blockies
+                     seed={address}
+                     size="12"
+                     scale="4"
+                     bgcolor="#aaa"
+                     spotcolor="#000"
+                  />
+                  <Heading size="md">
+                     <Tooltip label={address} aria-label="A tooltip">
+                        {address.substring(0, 4) +
+                           "..." +
+                           address.substring(address.length - 4)}
+                     </Tooltip>
+                  </Heading>
+               </Flex>
             </CardHeader>
             <CardBody>
                {showVoterDetails && dataVoter ? getVoterInfo() : ""}
