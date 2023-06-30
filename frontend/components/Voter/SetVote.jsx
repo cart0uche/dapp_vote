@@ -2,6 +2,7 @@ import { Button, ButtonGroup, useToast } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
 import Contract from "../../public/Voting.json";
 import { useVoteContext } from "@/components/voteContext";
+import { MdOutlineHowToVote } from "react-icons/md";
 
 function SetVote({ proposalId }) {
    const { workflowStatus } = useVoteContext();
@@ -28,6 +29,7 @@ function SetVote({ proposalId }) {
          {" "}
          <ButtonGroup spacing="2">
             <Button
+               leftIcon={<MdOutlineHowToVote size={20} />}
                type="submit"
                isLoading={isLoading}
                isDisabled={workflowStatus !== 3}
