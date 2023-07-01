@@ -4,35 +4,14 @@ import AddProposal from "./AddProposal";
 import { Box, Flex, Text, useToast } from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
 import ListVoter from "../ListVoter";
-import { useAccount, useContractEvent } from "wagmi";
+import { useAccount } from "wagmi";
 import WinningProposal from "./WinningProposal";
 import { useVoteContext } from "@/components/voteContext";
-import Contract from "../../public/Voting.json";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 function Voters() {
    const { workflowStatus } = useVoteContext();
    const { isConnected } = useAccount();
-   const [newVote, setNewVote] = useState(0);
-   const toast = useToast();
-
-   const unwatchVote = useContractEvent({
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-      abi: Contract.abi,
-      eventName: "Voted",
-      listener: (event) => {
-         console.log("Voted" + event);
-         setNewVote(newVote + 1);
-         toast({
-            status: "success",
-            isClosable: true,
-            position: "top-middle",
-            title: "Vote registered",
-            description: "Proposal" + event[0].args.proposalId,
-         });
-         unwatchVote();
-      },
-   });
 
    if (isConnected) {
       return (
@@ -60,12 +39,12 @@ function Voters() {
                         ) : null}
                      </Flex>
                      <Box marginLeft={100}>
-                        <ListProposal newVote={newVote} />
+                        <ListProposal />
                      </Box>
                   </TabPanel>
                   <TabPanel>
                      <Box marginLeft="50px" marginTop="50px">
-                        <ListVoter showVoterDetails={true} newVote={newVote} />
+                        <ListVoter showVoterDetails={true} />
                      </Box>
                      <Box marginLeft="50px" width="30%" marginTop="50px">
                         <WinningProposal />

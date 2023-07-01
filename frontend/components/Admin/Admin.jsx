@@ -5,6 +5,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import ListVoter from "../ListVoter";
 import { useVoteContext } from "@/components/voteContext";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 function Admin() {
    const { workflowStatus } = useVoteContext();
@@ -15,22 +16,33 @@ function Admin() {
          <div>
             <WorkflowStatus />
             <ChangeWorkflowStatus />
-            <Flex
-               justifyContent="center"
-               alignItems="center"
-               marginTop={70}
-               marginLeft={100}
-               marginBottom={70}
-            >
-               {workflowStatus === 0 ? (
-                  <Box w="300px">
-                     <AddVoter />
-                  </Box>
-               ) : null}
-            </Flex>
-            <Box marginLeft={100}>
-               <ListVoter showVoterDetails={false} />
-            </Box>
+            <Tabs variant="soft-rounded" align="center">
+               <TabList>
+                  <Tab>Voters</Tab>
+                  <Tab>Events</Tab>
+               </TabList>
+
+               <TabPanels>
+                  <TabPanel>
+                     <Flex
+                        justifyContent="center"
+                        alignItems="center"
+                        marginTop={70}
+                        marginLeft={100}
+                        marginBottom={70}
+                     >
+                        {workflowStatus === 0 ? (
+                           <Box w="300px">
+                              <AddVoter />
+                           </Box>
+                        ) : null}
+                     </Flex>
+                     <Box marginLeft={100}>
+                        <ListVoter showVoterDetails={false} />
+                     </Box>
+                  </TabPanel>
+               </TabPanels>
+            </Tabs>
          </div>
       );
    } else {

@@ -54,7 +54,7 @@ function AddVoter() {
    return (
       <div>
          <Heading>Add a voter</Heading>
-         <Box marginTop="100px" maxWidth="400px" margin="0 auto">
+         <Box maxWidth="400px" margin="0 auto">
             <form onSubmit={handleSubmit}>
                <FormControl>
                   <Input

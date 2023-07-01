@@ -3,13 +3,12 @@ import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "./client";
 import OneVoter from "./Admin/OneVoter";
-import Contract from "../public/Voting.json";
-import { useContractEvent } from "wagmi";
-import { Heading } from "@chakra-ui/react";
+import { useVoteContext } from "@/components/voteContext";
 import { v4 as uuidv4 } from "uuid";
 
-function ListVoter({ showVoterDetails, newVote }) {
+function ListVoter({ showVoterDetails }) {
    const [voters, setVoters] = useState([]);
+   const { newVoter, newVote } = useVoteContext();
    const toast = useToast();
 
    async function fetchVoters() {
@@ -30,27 +29,9 @@ function ListVoter({ showVoterDetails, newVote }) {
       setVoters(parsedVoters);
    }
 
-   const unwatch = useContractEvent({
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-      abi: Contract.abi,
-      eventName: "VoterRegistered",
-      listener(event) {
-         fetchVoters();
-         console.log("VoterRegistered" + event);
-         toast({
-            status: "success",
-            isClosable: true,
-            position: "top-middle",
-            title: "New voter added",
-            description: "From " + event[0].args.voterAddress,
-         });
-         unwatch();
-      },
-   });
-
    useEffect(() => {
       fetchVoters();
-   }, [newVote]);
+   }, [newVoter, newVote]);
 
    return (
       <div>

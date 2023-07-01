@@ -1,23 +1,15 @@
-import {
-   Card,
-   Heading,
-   CardFooter,
-   useToast,
-   Divider,
-   SimpleGrid,
-} from "@chakra-ui/react";
+import { Card, CardFooter, Divider, SimpleGrid } from "@chakra-ui/react";
 import { parseAbiItem } from "viem";
 import { useEffect, useState } from "react";
 import { publicClient } from "../client";
-import { useContractEvent } from "wagmi";
-import Contract from "../../public/Voting.json";
 import OneProposal from "./OneProposal";
 import SetVote from "./SetVote";
+import { useVoteContext } from "@/components/voteContext";
 import { v4 as uuidv4 } from "uuid";
 
-function ListProposal({ newVote }) {
+function ListProposal() {
    const [proposals, setProposals] = useState([]);
-   const toast = useToast();
+   const { newProposal, newVote } = useVoteContext();
 
    async function fetchProposal() {
       const filter = await publicClient.createEventFilter({
@@ -40,25 +32,7 @@ function ListProposal({ newVote }) {
 
    useEffect(() => {
       fetchProposal();
-   }, [newVote]);
-
-   const unwatchProposal = useContractEvent({
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-      abi: Contract.abi,
-      eventName: "ProposalRegistered",
-      listener: (event) => {
-         console.log("ProposalRegistered" + event);
-         fetchProposal();
-         toast({
-            status: "success",
-            isClosable: true,
-            position: "top-middle",
-            title: "New proposal registered",
-            description: "Proposal number " + event[0].args.proposalId,
-         });
-         unwatchProposal();
-      },
-   });
+   }, [newVote, newProposal]);
 
    return (
       <div>
