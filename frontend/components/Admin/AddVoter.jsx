@@ -8,12 +8,15 @@ import {
    Button,
    useToast,
 } from "@chakra-ui/react";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 import { useContractWrite } from "wagmi";
 import Contract from "../../public/Voting.json";
+import { isAddress } from "viem";
 
 function AddVoter() {
    const [inputValue, setInputValue] = useState("");
    const [addressVoter, setAddressVoter] = useState("");
+   const [displayBadAddress, setDisplayBadAddress] = useState(false);
    const toast = useToast();
 
    const { write, isLoading } = useContractWrite({
@@ -27,7 +30,8 @@ function AddVoter() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "addVoter function failed",
+            title: "addVoter failed",
+            description: error.message,
          });
       },
    });
@@ -36,25 +40,36 @@ function AddVoter() {
       if (addressVoter !== "") {
          write();
       }
+      return () => {
+         setAddressVoter("");
+      };
    }, [addressVoter]);
 
    const handleChange = (event) => {
       event.preventDefault();
-      console.log("handleChange");
       setInputValue(event.target.value);
+      if (displayBadAddress) {
+         if (isAddress(event.target.value)) {
+            setDisplayBadAddress(false);
+         }
+      }
    };
 
    const handleSubmit = (event) => {
       event.preventDefault();
-      console.log("handleSubmit");
-      setAddressVoter(inputValue);
+      if (isAddress(inputValue)) {
+         setDisplayBadAddress(false);
+         setAddressVoter(inputValue);
+      } else {
+         setDisplayBadAddress(true);
+      }
       setInputValue("");
    };
 
    return (
       <div>
          <Heading>Add a voter</Heading>
-         <Box maxWidth="400px" margin="0 auto">
+         <Box maxWidth="400px" margin="0 auto" mt={3}>
             <form onSubmit={handleSubmit}>
                <FormControl>
                   <Input
@@ -63,6 +78,12 @@ function AddVoter() {
                      onChange={handleChange}
                      placeholder="address"
                   />
+                  {displayBadAddress ? (
+                     <Alert mt={1} status="error">
+                        <AlertIcon />
+                        Bad format address
+                     </Alert>
+                  ) : null}
                </FormControl>
                <Button
                   isLoading={isLoading}

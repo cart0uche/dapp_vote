@@ -27,7 +27,8 @@ function AddProposal() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "addProposal function failed",
+            title: "addProposal failed",
+            description: error.message,
          });
       },
    });
@@ -40,6 +41,9 @@ function AddProposal() {
       if (proposal !== "") {
          write();
       }
+      return () => {
+         setProposal("");
+      };
    }, [proposal]);
 
    const handleSubmit = (event) => {

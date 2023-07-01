@@ -38,7 +38,8 @@ function ChangeWorkflowStatus() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "startProposalsRegistering function failed",
+            title: "startProposalsRegistering failed",
+            description: error.message,
          });
       },
    });
@@ -56,7 +57,8 @@ function ChangeWorkflowStatus() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "endProposalsRegistering function failed",
+            title: "endProposalsRegistering failed",
+            description: error.message,
          });
       },
    });
@@ -74,7 +76,8 @@ function ChangeWorkflowStatus() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "startVotingSession function failed",
+            title: "startVotingSession failed",
+            description: error.message,
          });
       },
    });
@@ -92,7 +95,8 @@ function ChangeWorkflowStatus() {
             status: "error",
             isClosable: true,
             position: "top-middle",
-            title: "endVotingSession function failed",
+            title: "endVotingSession failed",
+            description: error.message,
          });
       },
    });
@@ -108,7 +112,8 @@ function ChangeWorkflowStatus() {
                status: "error",
                isClosable: true,
                position: "top-middle",
-               title: "tallyVotes function failed",
+               title: "tallyVotes failed",
+               description: error.message,
             });
          },
       });
