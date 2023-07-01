@@ -1,5 +1,5 @@
 "use client";
-import { CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { CardHeader, CardBody, CardFooter, Heading } from "@chakra-ui/react";
 import Contract from "../../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
 import { useVoteContext } from "@/components/voteContext";
@@ -24,14 +24,18 @@ function OneProposal({ proposalId }) {
       <>
          {dataProposal ? (
             <>
-               <CardHeader>Proposal number {proposalId}</CardHeader>
+               <CardHeader>
+                  <Heading size="sm"> Proposal {proposalId}</Heading>
+               </CardHeader>
                <CardBody>{dataProposal.description}</CardBody>
                <CardFooter>
-                  {workflowStatus >= 3 ? (
-                     <>{dataProposal.voteCount.toString() + " vote"}</>
-                  ) : (
-                     ""
-                  )}
+                  <Heading size="s" color="#3182CE">
+                     {workflowStatus >= 3 ? (
+                        <>{dataProposal.voteCount.toString() + " vote"}</>
+                     ) : (
+                        ""
+                     )}
+                  </Heading>
                </CardFooter>
             </>
          ) : null}

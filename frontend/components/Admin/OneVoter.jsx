@@ -72,7 +72,9 @@ function OneVoter({ address, showVoterDetails }) {
                </Flex>
             </CardHeader>
             <CardBody>
-               {showVoterDetails && dataVoter ? getVoterInfo() : ""}
+               <Heading size="s">
+                  {showVoterDetails && dataVoter ? getVoterInfo() : ""}
+               </Heading>
             </CardBody>
          </Card>
       </>
