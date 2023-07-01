@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import ListVoter from "../ListVoter";
 import { useVoteContext } from "@/components/voteContext";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import EventsList from "./EventsList";
 
 function Admin() {
    const { workflowStatus } = useVoteContext();
@@ -40,6 +41,10 @@ function Admin() {
                      <Box marginLeft={100}>
                         <ListVoter showVoterDetails={false} />
                      </Box>
+                  </TabPanel>
+
+                  <TabPanel>
+                     <EventsList />
                   </TabPanel>
                </TabPanels>
             </Tabs>

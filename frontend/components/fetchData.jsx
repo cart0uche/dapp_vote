@@ -39,3 +39,24 @@ export async function fetchProposal(setter) {
 
    setter(parsedProposals);
 }
+
+export async function fetchVotes(setter) {
+   const filter = await publicClient.createEventFilter({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      event: parseAbiItem("event Voted(address, uint256)"),
+      fromBlock: fromBlock,
+   });
+
+   const logs = await publicClient.getFilterLogs({ filter });
+
+   const parsedProposals = logs.map((log, index) => {
+      const address = log.args[0];
+      const proposalId = Number(log.args[1]);
+      return {
+         address,
+         proposalId,
+      };
+   });
+
+   setter(parsedProposals);
+}
