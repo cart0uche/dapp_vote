@@ -33,7 +33,7 @@ function EventsList() {
    }, [newProposal]);
 
    useEffect(() => {
-      if (votes.length !== 0) {
+      if (voters.length !== 0) {
          setParticipation((100 * votes.length) / voters.length);
       }
    }, [votes]);
