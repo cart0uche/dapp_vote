@@ -14,6 +14,7 @@ const Header = () => {
          h="15vh"
       >
          <Image src="/alyra.png" width={100} height={100} alt="alyra" />
+         <Image src="/logo.png" width={500} height={700} alt="logo" />
          <ConnectButton />
       </Flex>
    );
