@@ -26,14 +26,17 @@ function EventsList() {
 
    useEffect(() => {
       fetchVotes(setVotes);
-      if (proposals.length !== 0) {
-         setParticipation((100 * votes.length) / proposals.length);
-      }
    }, [newVote]);
 
    useEffect(() => {
       fetchProposal(setProposals);
    }, [newProposal]);
+
+   useEffect(() => {
+      if (votes.length !== 0) {
+         setParticipation((100 * votes.length) / voters.length);
+      }
+   }, [votes]);
 
    return (
       <div>
