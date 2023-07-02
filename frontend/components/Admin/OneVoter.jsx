@@ -57,8 +57,8 @@ function OneVoter({ address, showVoterDetails }) {
                <Flex gap="6">
                   <Blockies
                      seed={address}
-                     size="12"
-                     scale="4"
+                     size={12}
+                     scale={4}
                      bgcolor="#aaa"
                      spotcolor="#000"
                   />

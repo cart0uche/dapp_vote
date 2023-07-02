@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useVoteContext } from "@/components/voteContext";
 import { fetchVoters, fetchProposal, fetchVotes } from "../fetchData.jsx";
+import { v4 as uuidv4 } from "uuid";
 
 function EventsList() {
    const { newVoter, newProposal, newVote } = useVoteContext();
@@ -52,7 +53,7 @@ function EventsList() {
 
                      <Tbody>
                         {voters.map((voter) => (
-                           <Tr>
+                           <Tr key={uuidv4()}>
                               <Td>{voter.address}</Td>
                            </Tr>
                         ))}
@@ -71,7 +72,7 @@ function EventsList() {
                      </Thead>
                      <Tbody>
                         {proposals.map((voter) => (
-                           <Tr>
+                           <Tr key={uuidv4()}>
                               <Td textAlign="center">{voter.proposalId}</Td>
                            </Tr>
                         ))}
@@ -90,13 +91,16 @@ function EventsList() {
                            </Th>
                         </Tr>
                      </Thead>
-                     {votes.map((voter) => (
-                        <Tr>
-                           <Td>
-                              {voter.address} votes proposal {voter.proposalId}
-                           </Td>
-                        </Tr>
-                     ))}
+                     <Tbody>
+                        {votes.map((voter) => (
+                           <Tr>
+                              <Td key={uuidv4()}>
+                                 {voter.address} votes proposal{" "}
+                                 {voter.proposalId}
+                              </Td>
+                           </Tr>
+                        ))}
+                     </Tbody>
                   </Table>
                </TableContainer>
             </Box>
