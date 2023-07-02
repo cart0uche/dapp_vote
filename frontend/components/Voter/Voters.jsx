@@ -46,9 +46,6 @@ function Voters() {
                      <Box marginLeft="50px" marginTop="50px">
                         <ListVoter showVoterDetails={true} />
                      </Box>
-                     <Box marginLeft="50px" width="30%" marginTop="50px">
-                        <WinningProposal />
-                     </Box>
                   </TabPanel>
                </TabPanels>
             </Tabs>

@@ -67,7 +67,13 @@ export const VoteContextProvider = ({ children }) => {
 
    return (
       <VoteContext.Provider
-         value={{ workflowStatus, setWorkFlowStatus, newProposal, newVoter, newVote }}
+         value={{
+            workflowStatus,
+            setWorkFlowStatus,
+            newProposal,
+            newVoter,
+            newVote,
+         }}
       >
          {children}
       </VoteContext.Provider>
