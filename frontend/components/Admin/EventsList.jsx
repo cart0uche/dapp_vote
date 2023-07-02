@@ -46,7 +46,7 @@ function EventsList() {
                <TableContainer>
                   <Table variant="simple" size="lg">
                      <Thead>
-                        <Tr>
+                        <Tr key={uuidv4()}>
                            <Th textAlign="center">Voters</Th>
                         </Tr>
                      </Thead>
@@ -66,7 +66,7 @@ function EventsList() {
                <TableContainer>
                   <Table variant="simple" size="lg">
                      <Thead>
-                        <Tr>
+                        <Tr key={uuidv4()}>
                            <Th textAlign="center">Proposals</Th>
                         </Tr>
                      </Thead>
@@ -85,7 +85,7 @@ function EventsList() {
                <TableContainer>
                   <Table variant="simple" size="lg">
                      <Thead>
-                        <Tr>
+                        <Tr key={uuidv4()}>
                            <Th textAlign="center">
                               Votes (participation {participation}%)
                            </Th>
@@ -93,7 +93,7 @@ function EventsList() {
                      </Thead>
                      <Tbody>
                         {votes.map((voter) => (
-                           <Tr>
+                           <Tr key={uuidv4()}>
                               <Td key={uuidv4()}>
                                  {voter.address} votes proposal{" "}
                                  {voter.proposalId}
