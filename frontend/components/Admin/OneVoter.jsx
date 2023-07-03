@@ -11,7 +11,7 @@ import Contract from "../../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
 import Blockies from "react-blockies";
 
-function OneVoter({ address, showVoterDetails }) {
+function OneVoter({ address }) {
    const { address: addrAccount } = useAccount();
    const {
       data: dataVoter,
@@ -73,7 +73,7 @@ function OneVoter({ address, showVoterDetails }) {
             </CardHeader>
             <CardBody>
                <Heading size="s">
-                  {showVoterDetails && dataVoter ? getVoterInfo() : ""}
+                  {dataVoter ? getVoterInfo() : ""}
                </Heading>
             </CardBody>
          </Card>

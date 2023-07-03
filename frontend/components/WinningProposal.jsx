@@ -1,8 +1,8 @@
 import { Heading } from "@chakra-ui/react";
-import Contract from "../../public/Voting.json";
+import Contract from "../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
 import { useState, useEffect } from "react";
-import { fetchVoters } from "../fetchData.jsx";
+import { fetchVoters } from "./fetchData.jsx";
 
 function WinningProposal() {
    const [voters, setVoters] = useState([]);

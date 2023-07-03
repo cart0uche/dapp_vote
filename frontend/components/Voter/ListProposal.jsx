@@ -5,7 +5,7 @@ import SetVote from "./SetVote";
 import { useVoteContext } from "@/components/voteContext";
 import { v4 as uuidv4 } from "uuid";
 import { fetchProposal } from "../fetchData.jsx";
-import WinningProposal from "./WinningProposal";
+import WinningProposal from "../WinningProposal";
 
 function ListProposal() {
    const { workflowStatus, newProposal, newVote } = useVoteContext();

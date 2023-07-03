@@ -77,15 +77,17 @@ function Main() {
                      <Voters />
                   </TabPanel>
                ) : (
-                  <Box
-                     display="flex"
-                     justifyContent="center"
-                     alignItems="center"
-                  >
-                     <Text fontSize="xl" marginTop="2rem">
-                        Ask the admin to add you in the voters list
-                     </Text>
-                  </Box>
+                  <TabPanel>
+                     <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                     >
+                        <Text fontSize="xl" marginTop="2rem">
+                           Ask the admin to add you in the voters list
+                        </Text>
+                     </Box>
+                  </TabPanel>
                )}
             </TabPanels>
          </Tabs>

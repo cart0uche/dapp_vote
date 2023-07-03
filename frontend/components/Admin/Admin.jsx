@@ -7,6 +7,7 @@ import ListVoter from "../ListVoter";
 import { useVoteContext } from "@/components/voteContext";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import EventsList from "./EventsList";
+import WinningProposal from "../WinningProposal";
 
 function Admin() {
    const { workflowStatus } = useVoteContext();
@@ -17,6 +18,16 @@ function Admin() {
          <div>
             <WorkflowStatus />
             <ChangeWorkflowStatus />
+            {workflowStatus === 5 ? (
+               <Box
+                  marginLeft="50px"
+                  width="30%"
+                  marginTop="50px"
+                  marginBottom="50px"
+               >
+                  <WinningProposal />
+               </Box>
+            ) : null}
             <Tabs variant="soft-rounded" align="center">
                <TabList>
                   <Tab>Voters</Tab>
@@ -38,9 +49,6 @@ function Admin() {
                            </Box>
                         ) : null}
                      </Flex>
-                     <Box marginLeft={100}>
-                        <ListVoter showVoterDetails={false} />
-                     </Box>
                   </TabPanel>
 
                   <TabPanel>

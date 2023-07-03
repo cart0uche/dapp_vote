@@ -5,7 +5,7 @@ import { useVoteContext } from "@/components/voteContext";
 import { v4 as uuidv4 } from "uuid";
 import { fetchVoters } from "./fetchData.jsx";
 
-function ListVoter({ showVoterDetails }) {
+function ListVoter() {
    const [voters, setVoters] = useState([]);
    const { newVoter, newVote } = useVoteContext();
 
@@ -21,11 +21,7 @@ function ListVoter({ showVoterDetails }) {
          >
             {voters.length > 0 ? (
                voters.map((voter) => (
-                  <OneVoter
-                     key={uuidv4()}
-                     address={voter.address}
-                     showVoterDetails={showVoterDetails}
-                  />
+                  <OneVoter key={uuidv4()} address={voter.address} />
                ))
             ) : (
                <span>No voters yet</span>

@@ -5,7 +5,6 @@ import { Box, Flex, Text, useToast } from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
 import ListVoter from "../ListVoter";
 import { useAccount } from "wagmi";
-import WinningProposal from "./WinningProposal";
 import { useVoteContext } from "@/components/voteContext";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
@@ -44,7 +43,7 @@ function Voters() {
                   </TabPanel>
                   <TabPanel>
                      <Box marginLeft="50px" marginTop="50px">
-                        <ListVoter showVoterDetails={true} />
+                        <ListVoter />
                      </Box>
                   </TabPanel>
                </TabPanels>
