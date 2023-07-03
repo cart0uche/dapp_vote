@@ -1,18 +1,15 @@
 import { useState } from "react";
 import WorkflowStatus from "../WorkflowStatus";
 import AddProposal from "./AddProposal";
-import { Box, Flex, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex} from "@chakra-ui/react";
 import ListProposal from "./ListProposal";
 import ListVoter from "../ListVoter";
-import { useAccount } from "wagmi";
 import { useVoteContext } from "@/components/voteContext";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 function Voters() {
    const { workflowStatus } = useVoteContext();
-   const { isConnected } = useAccount();
 
-   if (isConnected) {
       return (
          <div>
             <WorkflowStatus />
@@ -50,9 +47,7 @@ function Voters() {
             </Tabs>
          </div>
       );
-   } else {
-      return <Text> Please connect your wallet</Text>;
-   }
+  
 }
 
 export default Voters;

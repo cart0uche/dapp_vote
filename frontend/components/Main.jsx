@@ -21,7 +21,7 @@ function Main() {
    const [mounted, setMounted] = useState(false);
    const [voters, setVoters] = useState([]);
    const [isVoter, setIsVoter] = useState(false);
-   const { address: addrAccount } = useAccount();
+   const { address: addrAccount, isConnected } = useAccount();
 
    const { data: owner } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
@@ -57,6 +57,10 @@ function Main() {
    }, [voters]);
 
    if (!mounted) return <></>;
+
+   if (isConnected === false){
+      return <Text> Please connect your wallet</Text>;
+   }
 
    return (
       <div>
