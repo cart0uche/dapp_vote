@@ -20,7 +20,7 @@ const Header = () => {
             <ConnectButton />
             <Flex gap={1} justifyContent="flex-end">
                <Box ml={2}>
-                  <Link href="https://sepolia.etherscan.io/address/0xdbe6c93e847d551ED417b8e173725760fBb37880#code">
+                  <Link href="https://sepolia.etherscan.io/address/0x669414c4df6e1458453030871aceAAE381B22d94#code">
                      <Image
                         src="/etherscan-logo.png"
                         width={30}
