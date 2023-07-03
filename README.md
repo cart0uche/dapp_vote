@@ -5,6 +5,7 @@
 -  [Projet Alyra 3 : Voting DApp](#projet-alyra-3--voting-dapp)
    -  [Table of Contents](#table-of-contents)
    -  [Presentation](#presentation)
+   -  [Spécification](#spécification)
    -  [Technologie](#technologie)
    -  [Installation](#installation)
    -  [Deploiement](#deploiement)
@@ -15,6 +16,21 @@
 Ce projet fait suite aux cours Alyra portant sur les tests unitaires d'un code Solidity.
 Les tests sont réalisés sur la correction du projet 1 du système de Vote.
 Le frontend a été développé avec Next et chakra-ui, et la librairie web3 utilisée est wagmi (avec viem).
+
+## Spécification
+
+L'application permet :
+
+-  l’enregistrement d’une liste blanche d'électeurs.
+
+-  à l'administrateur de commencer la session d'enregistrement de la proposition.
+-  aux électeurs inscrits d’enregistrer leurs propositions.
+-  à l'administrateur de mettre fin à la session d'enregistrement des propositions.
+-  à l'administrateur de commencer la session de vote.
+-  aux électeurs inscrits de voter pour leurs propositions préférées.
+-  à l'administrateur de mettre fin à la session de vote.
+-  à l'administrateur de comptabiliser les votes.
+-  à tout le monde de consulter le résultat.
 
 ## Technologie
 
