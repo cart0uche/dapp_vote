@@ -10,7 +10,7 @@ export const VoteContextProvider = ({ children }) => {
    const [workflowStatus, setWorkFlowStatus] = useState(0);
    const [newProposal, setNewProposal] = useState(0);
    const [newVoter, setNewVoter] = useState(0);
-   const [newVote, setNewVote] = useState(0);
+   const [newVote, setNewVote] = useState("");
    const toast = useToast();
 
    const unwatchProposal = useContractEvent({
@@ -36,7 +36,7 @@ export const VoteContextProvider = ({ children }) => {
       abi: Contract.abi,
       eventName: "Voted",
       listener: (event) => {
-         setNewVote(event[0].args.proposalId);
+         setNewVote(event[0].args.voter);
          toast({
             status: "success",
             isClosable: true,

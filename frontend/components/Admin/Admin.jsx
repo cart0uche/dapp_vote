@@ -15,40 +15,43 @@ function Admin() {
       <div>
          <WorkflowStatus />
          <ChangeWorkflowStatus />
-         {workflowStatus === 5 ? (
-            <Box
-               marginLeft="50px"
-               width="30%"
-               marginTop="50px"
-               marginBottom="50px"
-            >
-               <WinningProposal />
-            </Box>
-         ) : null}
+
          <Tabs variant="soft-rounded" align="center">
             <TabList>
-               <Tab>Voters</Tab>
+               {workflowStatus === 0 ? <Tab>Voters</Tab> : null}
+
                <Tab>Events</Tab>
             </TabList>
 
             <TabPanels>
-               <TabPanel>
-                  <Flex
-                     justifyContent="center"
-                     alignItems="center"
-                     marginTop={70}
-                     marginLeft={100}
-                     marginBottom={70}
-                  >
-                     {workflowStatus === 0 ? (
+               {workflowStatus === 0 ? (
+                  <TabPanel>
+                     <Flex
+                        justifyContent="center"
+                        alignItems="center"
+                        marginTop={70}
+                        marginLeft={100}
+                        marginBottom={70}
+                     >
                         <Box w="300px">
                            <AddVoter />
                         </Box>
-                     ) : null}
-                  </Flex>
-               </TabPanel>
+                     </Flex>
+                  </TabPanel>
+               ) : null}
 
                <TabPanel>
+                  {workflowStatus === 5 ? (
+                     <Flex
+                        justifyContent="center"
+                        alignItems="center"
+                        marginBottom={70}
+                     >
+                        <Box marginLeft="50px" width="30%" marginTop="50px">
+                           <WinningProposal />
+                        </Box>
+                     </Flex>
+                  ) : null}
                   <EventsList />
                </TabPanel>
             </TabPanels>

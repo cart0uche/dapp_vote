@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import Contract from "../public/Voting.json";
 import { useContractRead, useAccount } from "wagmi";
 import { useState, useEffect } from "react";
@@ -18,7 +18,11 @@ function WinningProposal() {
       },
    });
 
-   const { data: dataProposal, isSuccess } = useContractRead({
+   const {
+      data: dataProposal,
+      isSuccess,
+      isError,
+   } = useContractRead({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: Contract.abi,
       functionName: "getOneProposal",
@@ -31,19 +35,29 @@ function WinningProposal() {
 
    useEffect(() => {
       fetchVoters(setVoters);
-   }, []);
+   }, [winningProposalID]);
 
    return (
       <div>
          <Heading>
             {voters !== undefined && dataProposal !== undefined && (
                <>
-                  Proposal number {winningProposalID.toString()} win with{" "}
-                  {(
-                     (100 * Number(dataProposal.voteCount)) /
-                     voters.length
-                  ).toFixed(1)}
-                  %
+                  {isError ? (
+                     <Text>
+                        {" "}
+                        Proposal number {winningProposalID.toString()} win{" "}
+                     </Text>
+                  ) : (
+                     <Text>
+                        {" "}
+                        Proposal number {winningProposalID.toString()} win with{" "}
+                        {(
+                           (100 * Number(dataProposal.voteCount)) /
+                           voters.length
+                        ).toFixed(1)}
+                        %
+                     </Text>
+                  )}
                </>
             )}
          </Heading>
