@@ -8,13 +8,14 @@
    -  [Spécification](#spécification)
    -  [Technologie](#technologie)
    -  [Installation](#installation)
+   -  [Variables d'environnement](#variables-denvironnement)
    -  [Deploiement](#deploiement)
    -  [Stratégie de test](#stratégie-de-test)
+   -  [Note](#note)
 
 ## Presentation
 
-Ce projet fait suite aux cours Alyra portant sur les tests unitaires d'un code Solidity.
-Les tests sont réalisés sur la correction du projet 1 du système de Vote.
+Ce projet fait suite aux cours Alyra portant sur le developpement d'applications décentralisées.
 Le frontend a été développé avec Next et chakra-ui, et la librairie web3 utilisée est wagmi (avec viem).
 
 ## Spécification
@@ -65,13 +66,13 @@ yarn install
 Lancement des tests dans le repertoire backend :
 
 ```
-npx hardhat test
+yarn hardhat test
 ```
 
 Obtention de la couverture de tests
 
 ```
-npx hardhat coverage
+yarn hardhat coverage
 ```
 
 Lancement du serveur en local, dans le repertoire frontend :
@@ -79,6 +80,16 @@ Lancement du serveur en local, dans le repertoire frontend :
 ```
 yarn next dev
 ```
+
+## Variables d'environnement
+
+Sur le frontend, la variable d'environnement à renseigner dans /fontend/.env.local est l'addresse du smartcontract, dans NEXT_PUBLIC_CONTRACT_ADDRESS.
+
+Sur le backend, il ya 3 variables à renseigner dans /backend/.env:
+
+-  ETHERSCAN_API_KEY : pour la vérification du smart contract sur etherscan
+-  DEPLOYER_PRIVATE_KEY : pour la clé privée du compte qui déploie le smart contract
+-  INFURA_KEY : qui est clé la Infura pour l'accès au noeud
 
 ## Deploiement
 
@@ -107,3 +118,19 @@ Les suites de tests sont divisés en 4 groupes (describe) pour vérifier le fonc
 -  Le compte des votes (Test count votes)
 
 Un cinquième groupe permet de vérifier le fonctionnement du workflow (Test workflow)
+
+## Note
+
+Le déploiement du smart contract sur sepolia est lancé avec la commande :
+
+```
+cd backend
+yarn hardhat run ./scripts/deploy.js --network sepolia
+```
+
+Pour utiliser l'application en local, faut :
+
+-  remplacer sepolia par hardhat dans les fichiers layout.js:12 et client.jsx:13
+-  remplacer l'adresse du contract dans un fichier /frontend/.env dans une variable NEXT_PUBLIC_CONTRACT_ADDRESS
+
+Ou utiliser la branche localhost de ce projet.
