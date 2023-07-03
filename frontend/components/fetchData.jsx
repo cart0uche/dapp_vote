@@ -1,7 +1,7 @@
 import { publicClient } from "./client";
 import { parseAbiItem } from "viem";
 
-const fromBlock = 3786668n; //0n;
+const fromBlock = 0n;
 
 export async function fetchVoters(setter) {
    const filter = await publicClient.createEventFilter({

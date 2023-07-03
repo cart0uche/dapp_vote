@@ -9,8 +9,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { VoteContextProvider } from "@/components/voteContext";
 
 const { chains, publicClient } = configureChains(
-   //[hardhat],
-   [sepolia],
+   [hardhat],
+   //[sepolia],
    [
       //alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
       publicProvider(),
