@@ -132,5 +132,6 @@ Pour utiliser l'application en local, faut :
 
 -  remplacer sepolia par hardhat dans les fichiers layout.js:12 et client.jsx:13
 -  remplacer l'adresse du contract dans un fichier /frontend/.env dans une variable NEXT_PUBLIC_CONTRACT_ADDRESS
+-  passer fromBlock à 0 dans fetchData.jsx:4
 
 Ou utiliser la branche localhost de ce projet.
